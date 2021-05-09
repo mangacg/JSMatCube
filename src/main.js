@@ -42,11 +42,12 @@ function updateFrame() {
 }
 
 // click
-MC.canvas.addEventListener('mousedown', function(e) {
+MC.canvas.addEventListener('mousedown', function(event) {
 	let rect = MC.canvas.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
-	MC.game.click(x, y, false);
+    let x = event.clientX - rect.left;
+    let y = event.clientY - rect.top;
+	let isNotLeft = event.button != 0;
+	MC.game.click(x, y, isNotLeft);
 });
 
 // shuffle
