@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<meta charset="utf-8">
+<title>JSMatCube</title>
+
+<link rel="stylesheet" type="text/css" href="./css/style.css">
+
+<script src="src/matcube/cube/Matrix44.js"></script>
+<script src="src/matcube/cube/Random.js"></script>
+<script src="src/matcube/cube/Cube.js"></script>
+<script src="src/matcube/cube/RCube.js"></script>
+<script src="src/matcube/cube/Cubelist.js"></script>
+<script src="src/matcube/cube/Cubelist1.js"></script>
+<script src="src/matcube/cube/Cubelist2.js"></script>
+<script src="src/matcube/cube/Cubelist3.js"></script>
+<script src="src/matcube/cube/Cubelist4.js"></script>
+<script src="src/matcube/CubeGame.js"></script>
+ 
+</style>  
+
+</head>
+
+<body>
+
+<div>
+
+<canvas id="myCanvas" width="640" height="480"></canvas>
+</div>    
+
+<div class="unselectable">
+
+<input type="checkbox" name="sound" id="soundCheck" checked>
+<label for="soundCheck">sound</label>
+
+<input type="button" value="shuffle" id="shuffleBtn">
+
+<input type="button" value="reset" id="resetBtn">
+
+<select name="size" id="sizeSel">
+    <option value="3x3">3x3</option>
+    <option value="4x4">4x4</option>
+    <option value="5x5">5x5</option>
+</select>
+
+<select name="stage" id="stageSel">
+    <option value="1:2col">1:2col</option>
+    <option value="2:2col">2:2col</option>
+    <option value="3:2col">3:2col</option>
+    <option value="4:2col">4:2col</option>
+    <option value="1:6col">1:6col</option>
+    <option value="2:6col">2:6col</option>
+    <option value="3:6col">3:6col</option>
+    <option value="4:6col">4:6col</option>
+</select>
+
+</div>
+
+<audio id="click1Sound" preload>
+    <source src="./data/sound/click1.wav" type="audio/wav">
+</audio>
+<audio id="click2Sound" src="data/sound/click2.wav">click2.wav</audio>
+
+<script src="src/main.js"></script>
+
+</body>
+
+</html>
