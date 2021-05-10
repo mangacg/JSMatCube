@@ -14,7 +14,7 @@ class CubeGame {
 		this.camMat = new Matrix44();
 		this.winMat = new Matrix44();
 		this.cubelist;
-		this.cubeSize  = 0; // 3x3, 4x4, 5x5
+		this.cubeSize  = 2; // 2x2, 3x3, 4x4, 5x5
 		this.cubeStage = 0; // 0-7
 		//this.cubeStage = 2; // 0-7
 		this.isSound   = false;
@@ -89,7 +89,7 @@ class CubeGame {
 	}
 
 	changeCubeSize(i) {
-		return this.cubelist.resize(i+3, i+3);
+		return this.cubelist.resize(i, i);
 	}
 
 	changeCubeStage(n) {

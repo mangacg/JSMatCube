@@ -9,7 +9,7 @@ init();
 updateFrame();
 
 function init() {
-	MC.game.setCubeSize(1);
+	MC.game.setCubeSize(3);
 	MC.game.setCubeStage(4);
 	MC.game.shuffleCube();
 	MC.game.enableSound(true);
@@ -86,10 +86,10 @@ resetBtn.addEventListener('click', function() {
 
 // size
 let sizeSel = document.getElementById('sizeSel');
-sizeSel.options[MC.game.getCubeSize()].selected = true;
+sizeSel.options[MC.game.getCubeSize()-2].selected = true;
 sizeSel.addEventListener('change', function(event) {
 	let index = event.currentTarget.selectedIndex;
-	MC.game.setCubeSize(index);
+	MC.game.setCubeSize(index+2);
 });
 
 // stage
