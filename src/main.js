@@ -58,7 +58,7 @@ MC.canvas.addEventListener('touchstart', function(event) {
 	}
 	
 	let rect      = MC.canvas.getBoundingClientRect();
-	let t         = event.touches[0];
+	let t         = event.touches[event.touches.length - 1];
     let x         = t.pageX - rect.left;
     let y         = t.pageY - rect.top;
 	let isNotLeft = event.touches.length != 1;
