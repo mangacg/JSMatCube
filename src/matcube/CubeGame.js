@@ -3,15 +3,6 @@
 //--------------------------------------------------------------
 class CubeGame {
 
-	// instance
-	static instance = new CubeGame();
-	static GetInstance() {
-		return CubeGame.instance;
-	}
-	static DeleteInstance() {
-		instance = null;
-	}
-
 	constructor() {
 		this.camMat = new Matrix44();
 		this.winMat = new Matrix44();
@@ -24,6 +15,15 @@ class CubeGame {
 
 		this.changeCubeStage(this.cubeStage);
 		this.changeCubeSize(this.cubeSize);
+	}
+
+	// instance
+	static instance = new CubeGame();
+	static GetInstance() {
+		return CubeGame.instance;
+	}
+	static DeleteInstance() {
+		instance = null;
 	}
 
 	getCubelist() {

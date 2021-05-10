@@ -3,20 +3,6 @@
 //--------------------------------------------------------------
 class Cubelist {
 
-	static BOX_INTERVAL     = 3;
-	static BOX_INTERVAL_NON = 2.1;
-	static BOX_LEN_NUM      = 5 * 5;
-	
-	static DIR_NONE	= 0;
-	static DIR_X	= 1;
-	static DIR_Y	= 2;
-	static DIR_Z	= 3;
-	static DIR_NX	= 4;	/* -x */
-	static DIR_NY	= 5;
-	static DIR_NZ	= 6;
-	static DIR_EACH	= 9;
-	static DIR_CHECK= 10;
-	
 	constructor(x, y, style) {
 		this.b_data = [];
 		this.b_list = [];
@@ -36,6 +22,20 @@ class Cubelist {
 		this.movePos   = 0;
 	}
 
+	static BOX_INTERVAL     = 3;
+	static BOX_INTERVAL_NON = 2.1;
+	static BOX_LEN_NUM      = 5 * 5;
+	
+	static DIR_NONE	= 0;
+	static DIR_X	= 1;
+	static DIR_Y	= 2;
+	static DIR_Z	= 3;
+	static DIR_NX	= 4;	/* -x */
+	static DIR_NY	= 5;
+	static DIR_NZ	= 6;
+	static DIR_EACH	= 9;
+	static DIR_CHECK= 10;
+	
 	/*------------------------------------
 
 	------------------------------------*/

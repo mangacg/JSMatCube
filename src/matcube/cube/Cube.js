@@ -3,6 +3,22 @@
 //--------------------------------------------------------------
 class Cube {
 
+	constructor() {
+		this.fcol    = Cube.FACE_COLOR;
+		this.vertex  = Cube.VERTEX;
+		this.face    = Cube.FACE;
+		this.nvertex = this.vertex.length;
+		this.nface   = this.face.length;
+		this.ccenter = [0, 0, 0];
+		this.svertex = []; // screen座標.
+		this.cvertex = []; // camera座標.
+
+		for (let i = 0; i < this.nvertex; ++i) {
+			this.svertex.push([0, 0]);
+			this.cvertex.push([0, 0, 0]);
+		}
+	}
+
 	static FACE_COLOR = [
 		"#ff0000", // Color.RED,
 		"#ff00ff", // Color.MAGENTA,
@@ -34,22 +50,6 @@ class Cube {
 					[2, 6, 7, 3]	/* -z */
 				  ];
 	
-	constructor() {
-		this.fcol    = Cube.FACE_COLOR;
-		this.vertex  = Cube.VERTEX;
-		this.face    = Cube.FACE;
-		this.nvertex = this.vertex.length;
-		this.nface   = this.face.length;
-		this.ccenter = [0, 0, 0];
-		this.svertex = []; // screen座標.
-		this.cvertex = []; // camera座標.
-
-		for (let i = 0; i < this.nvertex; ++i) {
-			this.svertex.push([0, 0]);
-			this.cvertex.push([0, 0, 0]);
-		}
-	}
-
 	/*-------------------------------------
 	  world -> camera -> screen座標へ
 	  -------------------------------------*/
