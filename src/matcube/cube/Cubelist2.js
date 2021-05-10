@@ -23,13 +23,13 @@ class Cubelist2 extends Cubelist {
 			}
 			if (i <= hx - 1)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_NZ;
-				else			p.user_flag = Cubelist.DIR_Z;
+				if (negative)	p.user_flag = CubelistDef.DIR_NZ;
+				else			p.user_flag = CubelistDef.DIR_Z;
 			}
 			if (i >= hx + 1)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_Z;
-				else			p.user_flag = Cubelist.DIR_NZ;
+				if (negative)	p.user_flag = CubelistDef.DIR_Z;
+				else			p.user_flag = CubelistDef.DIR_NZ;
 			}
 			else {
 				continue;
@@ -43,20 +43,20 @@ class Cubelist2 extends Cubelist {
 			}
 			if (i <= hy - 1)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_X;
-				else			p.user_flag = Cubelist.DIR_NX;
+				if (negative)	p.user_flag = CubelistDef.DIR_X;
+				else			p.user_flag = CubelistDef.DIR_NX;
 			}
 			if (i >= hy + 1)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_NX;
-				else			p.user_flag = Cubelist.DIR_X;
+				if (negative)	p.user_flag = CubelistDef.DIR_NX;
+				else			p.user_flag = CubelistDef.DIR_X;
 			}
 			else {
 				continue;
 			}
 		}
 		this.movePos  = 0.0;
-		this.moveFlag = Cubelist.DIR_EACH;
+		this.moveFlag = CubelistDef.DIR_EACH;
 		return 1;
 	}
 }

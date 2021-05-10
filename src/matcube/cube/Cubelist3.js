@@ -9,7 +9,7 @@ class Cubelist3 extends Cubelist {
 	{
 		super(x, y, style);
 		this.setEmpty(0, 0);
-		this.moveDir = Cubelist.DIR_NONE;
+		this.moveDir = CubelistDef.DIR_NONE;
 	}
 
 	/*--------------------------------------
@@ -38,14 +38,14 @@ class Cubelist3 extends Cubelist {
 			return 0;
 		}
 
-		if (emp[0] - hx > 0)		{ this.moveDir = Cubelist.DIR_X;  this.drawDir = true; }
-		else if (emp[0] - hx < 0)	{ this.moveDir = Cubelist.DIR_NX; this.drawDir = true; }
-		else if (emp[1] - hy > 0)	{ this.moveDir = Cubelist.DIR_Z;  this.drawDir = false; }
-		else if (emp[1] - hy < 0)	{ this.moveDir = Cubelist.DIR_NZ; this.drawDir = false; }
+		if (emp[0] - hx > 0)		{ this.moveDir = CubelistDef.DIR_X;  this.drawDir = true; }
+		else if (emp[0] - hx < 0)	{ this.moveDir = CubelistDef.DIR_NX; this.drawDir = true; }
+		else if (emp[1] - hy > 0)	{ this.moveDir = CubelistDef.DIR_Z;  this.drawDir = false; }
+		else if (emp[1] - hy < 0)	{ this.moveDir = CubelistDef.DIR_NZ; this.drawDir = false; }
 		else	return 0;
 
 		this.movePos  = 0.0;
-		this.moveFlag = Cubelist.DIR_EACH;
+		this.moveFlag = CubelistDef.DIR_EACH;
 		return 1;
 	}
 
@@ -86,30 +86,30 @@ class Cubelist3 extends Cubelist {
 		let dz = 0;
 		let ix = 0;
 		let iz = 0;
-		let dl = Cubelist.BOX_INTERVAL - 2;
+		let dl = CubelistDef.BOX_INTERVAL - 2;
 		let org;
 		let count = 0;
 		switch (this.moveDir)
 		{
-			case Cubelist.DIR_X:
+			case CubelistDef.DIR_X:
 				org	= org_px;
 				rz	= -Math.PI * this.movePos / 2.0;
 				dx	= this.movePos * dl;
 				ix	= 1;
 				break;
-			case Cubelist.DIR_NX:
+			case CubelistDef.DIR_NX:
 				org	= org_nx;
 				rz	= Math.PI * this.movePos / 2.0;
 				dx	= -this.movePos * dl;
 				ix	= -1;
 				break;
-			case Cubelist.DIR_Z:
+			case CubelistDef.DIR_Z:
 				org	= org_pz;
 				rx  = Math.PI * this.movePos / 2.0;
 				dz	= this.movePos * dl;
 				iz	= 1;
 				break;
-			case Cubelist.DIR_NZ:
+			case CubelistDef.DIR_NZ:
 				org	= org_nz;
 				rx	= -Math.PI * this.movePos / 2.0;
 				dz	= -this.movePos * dl;

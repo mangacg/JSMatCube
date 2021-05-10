@@ -1,4 +1,11 @@
 //--------------------------------------------------------------
+// CubeGameDef
+//--------------------------------------------------------------
+CubeGameDef = {
+	instance : null
+};
+
+//--------------------------------------------------------------
 // CubeGame
 //--------------------------------------------------------------
 class CubeGame {
@@ -18,12 +25,15 @@ class CubeGame {
 	}
 
 	// instance
-	static instance = new CubeGame();
+	//static instance = new CubeGame();
 	static GetInstance() {
-		return CubeGame.instance;
+		if (CubeGameDef.instance == null) {
+			CubeGameDef.instance = new CubeGame();
+		}
+		return CubeGameDef.instance;
 	}
 	static DeleteInstance() {
-		instance = null;
+		CubeGameDef.instance = null;
 	}
 
 	getCubelist() {

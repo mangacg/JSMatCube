@@ -1,4 +1,25 @@
 //--------------------------------------------------------------
+//  CubelistDef
+//--------------------------------------------------------------
+CubelistDef = {
+	BOX_INTERVAL     : 3,
+	BOX_INTERVAL_NON : 2.1,
+	BOX_LEN_NUM      : 5 * 5,
+	
+	DIR_NONE: 0,
+	DIR_X	: 1,
+	DIR_Y	: 2,
+	DIR_Z	: 3,
+	DIR_NX	: 4,	// -x
+	DIR_NY	: 5,
+	DIR_NZ	: 6,
+	DIR_EACH: 9,
+	DIR_CHECK: 10,
+	
+	iseed : 100,
+};
+
+//--------------------------------------------------------------
 //  CubeList
 //--------------------------------------------------------------
 class Cubelist {
@@ -6,7 +27,7 @@ class Cubelist {
 	constructor(x, y, style) {
 		this.b_data = [];
 		this.b_list = [];
-		for (let i = 0; i < Cubelist.BOX_LEN_NUM; i++) {
+		for (let i = 0; i < CubelistDef.BOX_LEN_NUM; i++) {
 			this.b_data[i] = new RCube(style);
 		}
 
@@ -17,11 +38,11 @@ class Cubelist {
 		this.cursor    = new Cursor();
 		this.moveStep  = 1 / 100; // 100msecで1ターン.
 		this.drawDir   = false;
-		this.moveFlag  = Cubelist.DIR_NONE;
+		this.moveFlag  = CubelistDef.DIR_NONE;
 		this.clearFlag = true;
 		this.movePos   = 0;
 	}
-
+/* ipadでエラー.
 	static BOX_INTERVAL     = 3;
 	static BOX_INTERVAL_NON = 2.1;
 	static BOX_LEN_NUM      = 5 * 5;
@@ -30,11 +51,13 @@ class Cubelist {
 	static DIR_X	= 1;
 	static DIR_Y	= 2;
 	static DIR_Z	= 3;
-	static DIR_NX	= 4;	/* -x */
+	static DIR_NX	= 4;	// -x
 	static DIR_NY	= 5;
 	static DIR_NZ	= 6;
 	static DIR_EACH	= 9;
 	static DIR_CHECK= 10;
+	static iseed = 100;
+*/
 	
 	/*------------------------------------
 
@@ -81,7 +104,7 @@ class Cubelist {
 	------------------------------------*/
 	initlist()
 	{
-		for (let i = 0; i < Cubelist.BOX_LEN_NUM; i++) {
+		for (let i = 0; i < CubelistDef.BOX_LEN_NUM; i++) {
 			this.b_data[i].use_flag = false;
 		}
 		for (let i = 0; i < this.xlen; i++) {
@@ -104,7 +127,7 @@ class Cubelist {
 			return false;
 		}
 
-		if (x * y > Cubelist.BOX_LEN_NUM) {
+		if (x * y > CubelistDef.BOX_LEN_NUM) {
 			return false;
 		}
 		if (this.xlen == x && this.ylen == y) {
@@ -131,16 +154,15 @@ class Cubelist {
 		return this.moveStep;
 	}
 
-	static iseed = 100;
 	/*------------------------------------
 
 	------------------------------------*/
 	shuffle(count, seed)
 	{
 		if (seed == null) {
-			let r = new Random(Cubelist.iseed);
+			let r = new Random(CubelistDef.iseed);
 			seed = r.next();
-			Cubelist.iseed = seed;
+			CubelistDef.iseed = seed;
 		}
 
 		let r = new Random(seed);
@@ -300,9 +322,9 @@ class Cubelist {
 	  -----------------------------------------------*/
 	getDrawPos(x, y, p)
 	{
-		p[0] = ((x - (this.xlen - 1) / 2)) * Cubelist.BOX_INTERVAL;
+		p[0] = ((x - (this.xlen - 1) / 2)) * CubelistDef.BOX_INTERVAL;
 		p[1] = 0;
-		p[2] = ((y - (this.ylen - 1) / 2)) * Cubelist.BOX_INTERVAL;
+		p[2] = ((y - (this.ylen - 1) / 2)) * CubelistDef.BOX_INTERVAL;
 	}
 
 	/*-----------------------------------------------
@@ -310,7 +332,7 @@ class Cubelist {
 	  -----------------------------------------------*/
 	doMoveEach(deltatime)
 	{
-		if (this.moveFlag != Cubelist.DIR_EACH) {
+		if (this.moveFlag != CubelistDef.DIR_EACH) {
 			return 0;
 		}
 		this.movePos += this.moveStep * deltatime;
@@ -326,12 +348,12 @@ class Cubelist {
 	endMoveEach() {
 		let		count = 0;
 	
-		if (this.moveFlag != Cubelist.DIR_EACH) {
+		if (this.moveFlag != CubelistDef.DIR_EACH) {
 			return 0;
 		}
 		this.movePos	= 1.0;
 		count			= this.doRoteEach(true);
-		this.moveFlag	= Cubelist.DIR_CHECK;
+		this.moveFlag	= CubelistDef.DIR_CHECK;
 		this.movePos	= 0.0;
 		return count;
 	}
@@ -357,12 +379,12 @@ class Cubelist {
 				const r = Math.PI * this.movePos / 2.0;
 				switch (p.user_flag)
 				{
-					case Cubelist.DIR_X:	rx =  r;	break;
-					case Cubelist.DIR_NX:	rx = -r;	break;
-					case Cubelist.DIR_Y:	ry =  r;	break;
-					case Cubelist.DIR_NY:	ry = -r;	break;
-					case Cubelist.DIR_NZ:	rz = -r;	break;
-					case Cubelist.DIR_Z:	rz =  r;	break;
+					case CubelistDef.DIR_X:	rx =  r;	break;
+					case CubelistDef.DIR_NX:	rx = -r;	break;
+					case CubelistDef.DIR_Y:	ry =  r;	break;
+					case CubelistDef.DIR_NY:	ry = -r;	break;
+					case CubelistDef.DIR_NZ:	rz = -r;	break;
+					case CubelistDef.DIR_Z:	rz =  r;	break;
 					default:	continue;
 				}
 				if (!endflag) {
@@ -371,7 +393,7 @@ class Cubelist {
 					p.rotMatrix(rx, ry, rz);
 					p.adjustMatrix();
 					p.updata6FaceId();
-					p.user_flag = Cubelist.DIR_NONE;
+					p.user_flag = CubelistDef.DIR_NONE;
 				}
 				count++;
 			}
@@ -384,7 +406,7 @@ class Cubelist {
 	  -------------------------------------------------*/
 	doCheckEachAbsolute()
 	{
-		if (this.moveFlag != Cubelist.DIR_CHECK || this.clearFlag) {
+		if (this.moveFlag != CubelistDef.DIR_CHECK || this.clearFlag) {
 			return false;
 		}
 		/*-----------
@@ -412,7 +434,7 @@ class Cubelist {
 	  -------------------------------------------------*/
 	doCheckEachRelative()
 	{
-		if (this.moveFlag != Cubelist.DIR_CHECK || this.clearFlag) {
+		if (this.moveFlag != CubelistDef.DIR_CHECK || this.clearFlag) {
 			return false;
 		}
 		/*-----------
@@ -456,12 +478,12 @@ class Cubelist {
 				continue;
 			}
 			if (i == hx - 1) {
-				if (negative)	p.user_flag = Cubelist.DIR_NZ;
-				else			p.user_flag = Cubelist.DIR_Z;
+				if (negative)	p.user_flag = CubelistDef.DIR_NZ;
+				else			p.user_flag = CubelistDef.DIR_Z;
 			}
 			if (i == hx + 1) {
-				if (negative)	p.user_flag = Cubelist.DIR_Z;
-				else			p.user_flag = Cubelist.DIR_NZ;
+				if (negative)	p.user_flag = CubelistDef.DIR_Z;
+				else			p.user_flag = CubelistDef.DIR_NZ;
 			}
 			else {
 				continue;
@@ -473,19 +495,19 @@ class Cubelist {
 				continue;
 			}
 			if (i == hy - 1) {
-				if (negative)	p.user_flag = Cubelist.DIR_X;
-				else			p.user_flag = Cubelist.DIR_NX;
+				if (negative)	p.user_flag = CubelistDef.DIR_X;
+				else			p.user_flag = CubelistDef.DIR_NX;
 			}
 			if (i == hy + 1) {
-				if (negative)	p.user_flag = Cubelist.DIR_NX;
-				else			p.user_flag = Cubelist.DIR_X;
+				if (negative)	p.user_flag = CubelistDef.DIR_NX;
+				else			p.user_flag = CubelistDef.DIR_X;
 			}
 			else {
 				continue;
 			}
 		}
 		this.movePos  = 0.0;
-		this.moveFlag = Cubelist.DIR_EACH;
+		this.moveFlag = CubelistDef.DIR_EACH;
 		return 1;
 	}
 

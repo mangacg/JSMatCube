@@ -182,7 +182,7 @@ class RCube extends Cube {
 
 		// 揃ったキューブをハイライト表示
 		// 上のループ内で以下を描画するとラインがつながらない
-		if (!this.isFaceMatch() || this.user_flag != Cubelist.DIR_NONE) {
+		if (!this.isFaceMatch() || this.user_flag != CubelistDef.DIR_NONE) {
 			ctx.restore();
 			return;
 		}

@@ -47,9 +47,9 @@ class Cubelist4 extends Cubelist {
 		p[1] = 0f;
 		p[2] = (((float)y - ((float)ylen - 1f) / 2f)) * BOX_INTERVAL;
 		*/
-		p[0] = (x - (this.xlen - 1) / 2) * Cubelist.BOX_INTERVAL_NON;
-		p[1] = -(x + y - 2) * Cubelist.BOX_INTERVAL_NON - 3.0;
-		p[2] = (y - (this.ylen - 1) / 2) * Cubelist.BOX_INTERVAL_NON;
+		p[0] = (x - (this.xlen - 1) / 2) * CubelistDef.BOX_INTERVAL_NON;
+		p[1] = -(x + y - 2) * CubelistDef.BOX_INTERVAL_NON - 3.0;
+		p[2] = (y - (this.ylen - 1) / 2) * CubelistDef.BOX_INTERVAL_NON;
 	}
 
 	/*-------------------------------------
@@ -65,13 +65,13 @@ class Cubelist4 extends Cubelist {
 			}
 			if (i == hx - 1)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_NZ;
-				else			p.user_flag = Cubelist.DIR_Z;
+				if (negative)	p.user_flag = CubelistDef.DIR_NZ;
+				else			p.user_flag = CubelistDef.DIR_Z;
 			}
 			if (i == hx + 1)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_Z;
-				else			p.user_flag = Cubelist.DIR_NZ;
+				if (negative)	p.user_flag = CubelistDef.DIR_Z;
+				else			p.user_flag = CubelistDef.DIR_NZ;
 			}
 			else {
 				continue;
@@ -85,13 +85,13 @@ class Cubelist4 extends Cubelist {
 			}
 			if (i == hy - 1)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_X;
-				else			p.user_flag = Cubelist.DIR_NX;
+				if (negative)	p.user_flag = CubelistDef.DIR_X;
+				else			p.user_flag = CubelistDef.DIR_NX;
 			}
 			if (i == hy + 1)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_NX;
-				else			p.user_flag = Cubelist.DIR_X;
+				if (negative)	p.user_flag = CubelistDef.DIR_NX;
+				else			p.user_flag = CubelistDef.DIR_X;
 			}
 			else {
 				continue;
@@ -102,8 +102,8 @@ class Cubelist4 extends Cubelist {
 			let p = this.getData(hx - 1, hy + 1);
 			if (p != null)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_Y;
-				else			p.user_flag = Cubelist.DIR_NY;
+				if (negative)	p.user_flag = CubelistDef.DIR_Y;
+				else			p.user_flag = CubelistDef.DIR_NY;
 			}
 		}
 		if (hy - 1 >= 0 && hx + 1 < this.xlen)
@@ -111,13 +111,13 @@ class Cubelist4 extends Cubelist {
 			let p = this.getData(hx + 1, hy - 1);
 			if (p != null)
 			{
-				if (negative)	p.user_flag = Cubelist.DIR_NY;
-				else			p.user_flag = Cubelist.DIR_Y;
+				if (negative)	p.user_flag = CubelistDef.DIR_NY;
+				else			p.user_flag = CubelistDef.DIR_Y;
 			}
 		}
 
 		this.movePos  = 0.0;
-		this.moveFlag = Cubelist.DIR_EACH;
+		this.moveFlag = CubelistDef.DIR_EACH;
 		return 1;
 	}
 }

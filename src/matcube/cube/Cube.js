@@ -1,12 +1,49 @@
 //--------------------------------------------------------------
+//  CubeDef
+//--------------------------------------------------------------
+
+CubeDef = {
+	FACE_COLOR : [
+		"#ff0000", // Color.RED,
+		"#ff00ff", // Color.MAGENTA,
+		"#0000ff", // Color.BLUE,
+		"#00ffff", // Color.CYAN,
+		"#00ff00", // Color.GREEN,
+		"#ffff00", // Color.YELLOW,
+		"#ff8f00", // Color.rgb(255, 165", 0),//.orange",
+		"#404040", // Color.DKGRAY //  .darkGray,
+		"#808080", // Color.GRAY, // .gray,
+		"#ff8fa0"  // Color.rgb(255, 192, 203),//.pink
+	],
+
+	VERTEX : [	[-1.0, 1.0, -1.0],
+						[ 1.0, 1.0, -1.0],
+						[ 1.0, 1.0,  1.0],
+						[-1.0, 1.0,  1.0],
+						[-1.0,-1.0, -1.0],
+						[ 1.0,-1.0, -1.0],
+						[ 1.0,-1.0,  1.0],
+						[-1.0,-1.0,  1.0]
+			 ],
+
+	FACE : [	[0, 1, 2, 3],	/// +y
+					[4, 7, 6, 5],	// -y
+					[1, 5, 6, 2],	// +x
+					[3, 7, 4, 0],	// -x
+					[0, 4, 5, 1],	// +z
+					[2, 6, 7, 3]	// -z
+		   ],
+};
+
+//--------------------------------------------------------------
 //  Cube
 //--------------------------------------------------------------
 class Cube {
 
 	constructor() {
-		this.fcol    = Cube.FACE_COLOR;
-		this.vertex  = Cube.VERTEX;
-		this.face    = Cube.FACE;
+		this.fcol    = CubeDef.FACE_COLOR;
+		this.vertex  = CubeDef.VERTEX;
+		this.face    = CubeDef.FACE;
 		this.nvertex = this.vertex.length;
 		this.nface   = this.face.length;
 		this.ccenter = [0, 0, 0];
@@ -18,7 +55,8 @@ class Cube {
 			this.cvertex.push([0, 0, 0]);
 		}
 	}
-
+/*
+	
 	static FACE_COLOR = [
 		"#ff0000", // Color.RED,
 		"#ff00ff", // Color.MAGENTA,
@@ -42,14 +80,15 @@ class Cube {
 						[-1.0,-1.0,  1.0]
 					];
 
-	static FACE = [	[0, 1, 2, 3],	/* +y */
-					[4, 7, 6, 5],	/* -y */
-					[1, 5, 6, 2],	/* +x */
-					[3, 7, 4, 0],	/* -x */
-					[0, 4, 5, 1],	/* +z */
-					[2, 6, 7, 3]	/* -z */
+	static FACE = [	[0, 1, 2, 3],	/// +y
+					[4, 7, 6, 5],	// -y
+					[1, 5, 6, 2],	// +x
+					[3, 7, 4, 0],	// -x
+					[0, 4, 5, 1],	// +z
+					[2, 6, 7, 3]	// -z
 				  ];
-	
+*/
+
 	/*-------------------------------------
 	  world -> camera -> screen座標へ
 	  -------------------------------------*/
