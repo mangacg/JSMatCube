@@ -33,9 +33,11 @@ function updateFrame() {
 		MC.game.draw(MC.ctx, MC.canvas.width, MC.canvas.height);
 	}
 	if (state.sound == 0) {	
+		MC.click1Sound.pause();
 		MC.click1Sound.currentTime = 0;
 		MC.click1Sound.play();
 	} else if (state.sound == 1) {
+		MC.click2Sound.pause();
 		MC.click2Sound.currentTime = 0;
 		MC.click2Sound.play();
 	}
