@@ -50,6 +50,21 @@ MC.canvas.addEventListener('mousedown', function(event) {
 	MC.game.click(x, y, isNotLeft);
 });
 
+// touch
+MC.canvas.addEventListener('touchstart', function(event) {
+	if (event.touches.length != 1) {
+		return;
+	}
+	event.preventDefault();
+
+	let rect      = MC.canvas.getBoundingClientRect();
+	let t         = event.touches[0];
+    let x         = t.pageX - rect.left;
+    let y         = t.pageY - rect.top;
+	let isNotLeft = event.touches.length != 1;
+	MC.game.click(x, y, isNotLeft);
+}, false);
+
 // shuffle
 let shuffleBtn = document.getElementById('shuffleBtn');
 shuffleBtn.addEventListener('click', function() {
