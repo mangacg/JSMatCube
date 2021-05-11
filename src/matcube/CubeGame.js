@@ -13,12 +13,12 @@ class CubeGame {
 	constructor() {
 		this.camMat = new Matrix44();
 		this.winMat = new Matrix44();
-		this.cubelist;
 		this.cubeSize  = 2; // 2x2, 3x3, 4x4, 5x5
 		this.cubeStage = 0; // 0-7
 		//this.cubeStage = 2; // 0-7
 		this.isSound   = false;
 		this.cubelist  = new Cubelist1(3, 3, new CubeStyle());
+		this.cubeDrawer = new CubeDrawer2D();
 
 		this.changeCubeStage(this.cubeStage);
 		this.changeCubeSize(this.cubeSize);
@@ -182,7 +182,7 @@ class CubeGame {
 
 		if (valuex != null) {
 			let cxy = [0, 0];
-			if (this.cubelist.pick(valuex, valuey, cxy)) // TODO: この処理もtartTimer()のスレッドで行うべき
+			if (this.cubeDrawer.pick(this.cubelist, valuex, valuey, cxy)) // TODO: この処理もtartTimer()のスレッドで行うべき
 			{
 				// console.log("pick pos(%d, %d), cubepos(%d, %d)", valuex, valuey, cxy[0], cxy[1]);
 				// TODO: pick（）の他に、移動に有効なキューブかどうかのチェックも必要。
@@ -215,7 +215,7 @@ class CubeGame {
 		ctx.fillStyle = "rgb(200, 200, 200)";
 		ctx.fillRect(0, 0, winsizex, winsizey);
 		this.setcamera(winsizex, winsizey);
-		this.cubelist.draw(ctx, this.camMat, this.winMat, null, winsizex, winsizey);
+		this.cubeDrawer.drawList(this.cubelist, ctx, this.camMat, this.winMat, null, winsizex, winsizey);
 	}
 
 	/*------------------------------------

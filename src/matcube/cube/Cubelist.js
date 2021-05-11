@@ -35,29 +35,12 @@ class Cubelist {
 			this.resize(3, 3);
 		}
 		
-		this.cursor    = new Cursor();
 		this.moveStep  = 1 / 100; // 100msecで1ターン.
 		this.drawDir   = false;
 		this.moveFlag  = CubelistDef.DIR_NONE;
 		this.clearFlag = true;
 		this.movePos   = 0;
 	}
-/* ipadでエラー.
-	static BOX_INTERVAL     = 3;
-	static BOX_INTERVAL_NON = 2.1;
-	static BOX_LEN_NUM      = 5 * 5;
-	
-	static DIR_NONE	= 0;
-	static DIR_X	= 1;
-	static DIR_Y	= 2;
-	static DIR_Z	= 3;
-	static DIR_NX	= 4;	// -x
-	static DIR_NY	= 5;
-	static DIR_NZ	= 6;
-	static DIR_EACH	= 9;
-	static DIR_CHECK= 10;
-	static iseed = 100;
-*/
 	
 	/*------------------------------------
 
@@ -287,39 +270,6 @@ class Cubelist {
 	/*-----------------------------------------------
 
 	  -----------------------------------------------*/
-	pick(x, y, result)
-	{
-		if (this._pick(x, y, result)) {
-			return this.getData(result[0], result[1]);
-		}
-		return null;
-	}
-
-	/*-----------------------------------------------
-
-	  -----------------------------------------------*/
-	_pick(x, y, result)
-	{
-		this.cursor.init(!this.drawDir, true, this.xlen, this.ylen);
-		do {
-			let rc = this.getData(this.cursor.x, this.cursor.y);
-			if (rc == null) {
-				continue;
-			}
-			if (rc.checkPicking(x, y))
-			{
-				result[0] = this.cursor.x;
-				result[1] = this.cursor.y;
-				return true;
-			}
-		} while (this.cursor.next());
-
-		return false;
-	}
-
-	/*-----------------------------------------------
-
-	  -----------------------------------------------*/
 	getDrawPos(x, y, p)
 	{
 		p[0] = ((x - (this.xlen - 1) / 2)) * CubelistDef.BOX_INTERVAL;
@@ -510,33 +460,9 @@ class Cubelist {
 		this.moveFlag = CubelistDef.DIR_EACH;
 		return 1;
 	}
-
-	/*-----------------------------------------------
-
-	  -----------------------------------------------*/
-	draw(ctx, camMat, winMat, modelMat, width, height)
-	{
-		let dp = [0, 0, 0];
-		let tm = new Matrix44();
-
-		this.cursor.init(this.drawDir, false, this.xlen, this.ylen);
-		do {
-			let p = this.getData(this.cursor.x, this.cursor.y);
-			if (p == null) {
-				continue;
-			}
-			this.getDrawPos(this.cursor.x, this.cursor.y, dp);
-			tm.makeTranslate(dp[0], dp[1], dp[2]);
-			if (modelMat != null) {
-				tm.MulMM(modelMat, tm);
-			}
-			tm.MulMM(tm, p.m);
-			p.draw(ctx, camMat, winMat, tm, width, height);
-		} while (this.cursor.next());
-	}
 }
 
-class Cursor {
+class CubelistCursor {
 	constructor() {
 		this.init(true, false, 3, 3);
 	}
