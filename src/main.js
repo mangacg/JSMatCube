@@ -3,7 +3,7 @@ MC.canvas = document.getElementById("myCanvas");
 MC.ctx    = MC.canvas.getContext("2d");
 MC.click1Sound = document.getElementById("click1Sound");
 MC.click2Sound = document.getElementById("click2Sound");
-MC.timer = document.getElementById('timer');
+MC.timerLabel = document.getElementById('timerLabel');
 
 MC.game   = CubeGame.GetInstance();
 
@@ -75,24 +75,24 @@ function updateTimeCount() {
     m =  ('0' + m).slice(-2); 
     s =  ('0' + s).slice(-2);
     ms = ('0' + ms).slice(-3);
-    MC.timer.textContent = m + ':' + s + ':' + ms;
+    MC.timerLabel.innerText = " Time : " + m + ':' + s + ':' + ms;	
 }
 
 function startTimeCount(bEnable) {
 	if (bEnable) {
 		MC.startTime = Date.now();
-		MC.timer.textContent = "00:00:000";
+		MC.timerLabel.innerText = "00:00:000";
 	} else {
 		MC.startTime = null;
-		MC.timer.textContent = "";
+		MC.timerLabel.innerText = "";
 	}
 }
 
 function doMatch() {
-	let timestr = MC.timer.textContent;
+	let timestr = MC.timerLabel.innerText;
 	startTimeCount(false);
-	window.alert("キューブが揃いました。\n Time = " + timestr);
-	MC.timer.textContent = "Time = " + timestr;
+	window.alert("キューブが揃いました。\n" + timestr);
+	MC.timerLabel.innerText = timestr;
 }
 
 // click
