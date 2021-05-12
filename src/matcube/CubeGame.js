@@ -137,6 +137,7 @@ class CubeGame {
 		state.match   = false;
 		state.stage   = false;
 		state.size    = false;
+		state.reset   = false;
 
 		let isRedraw = false;
 		let flag = false;
@@ -152,6 +153,7 @@ class CubeGame {
 				this.changeCubeSize(this.cubeSize);
 				isRedraw = true;
 				state.size = true;
+				state.reset   = true;
 			}
 			// stage
 			if (this.isRestage) {
@@ -159,6 +161,7 @@ class CubeGame {
 				this.changeCubeStage(this.cubeStage);
 				isRedraw = true;
 				state.stage = true;
+				state.reset   = true;
 			}
 			// shuffle
 			if (this.isSuffle) {
@@ -172,6 +175,7 @@ class CubeGame {
 				this.isReset	= false;
 				this.cubelist.initlist();
 				isRedraw = true;
+				state.reset   = true;
 			}
 			// click
 			valuex		= this.clickx;

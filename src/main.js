@@ -1,9 +1,11 @@
 let MC = {};
 MC.canvas = document.getElementById("myCanvas");
 MC.ctx    = MC.canvas.getContext("2d");
-MC.game   = CubeGame.GetInstance();
 MC.click1Sound = document.getElementById("click1Sound");
 MC.click2Sound = document.getElementById("click2Sound");
+MC.timer = document.getElementById('timer');
+
+MC.game   = CubeGame.GetInstance();
 
 init();
 updateFrame();
@@ -18,6 +20,12 @@ function init() {
 // main loop
 function updateFrame() {
     requestAnimationFrame(updateFrame);
+
+	if (MC.doMatch) {
+		MC.doMatch = false;
+		this.doMatch(); //  1フレーム遅れて、描画が更新された後に呼んでいる.
+		return;
+	}
 
 	let time = Date.now();
 	let deltatime = 0;
@@ -41,6 +49,50 @@ function updateFrame() {
 		MC.click2Sound.currentTime = 0;
 		MC.click2Sound.play();
 	}
+
+	if (state.shuffle) {
+		this.startTimeCount(true);
+	} else if (state.reset) {
+		this.startTimeCount(false);
+	}
+
+	if (state.match) {
+		MC.doMatch = true;
+	}
+
+	updateTimeCount();
+}
+
+function updateTimeCount() {
+	if (!MC.startTime) {
+		return;
+	}
+	let elapsedTime = Date.now() - MC.startTime;
+
+    let m  = Math.floor(elapsedTime / 60000);
+    let s  = Math.floor(elapsedTime % 60000 / 1000);
+    let ms = elapsedTime % 1000;
+    m =  ('0' + m).slice(-2); 
+    s =  ('0' + s).slice(-2);
+    ms = ('0' + ms).slice(-3);
+    MC.timer.textContent = m + ':' + s + ':' + ms;
+}
+
+function startTimeCount(bEnable) {
+	if (bEnable) {
+		MC.startTime = Date.now();
+		MC.timer.textContent = "00:00:000";
+	} else {
+		MC.startTime = null;
+		MC.timer.textContent = "";
+	}
+}
+
+function doMatch() {
+	let timestr = MC.timer.textContent;
+	startTimeCount(false);
+	window.alert("キューブが揃いました。\n Time = " + timestr);
+	MC.timer.textContent = "Time = " + timestr;
 }
 
 // click
