@@ -20,6 +20,8 @@ function init() {
 
 // Web Audio API で再生するための初期化.
 function initWebAudio() {
+	return; // スマホで動かなくなったので無効にした.
+
 	if (MC.audioContext) {
 		return;
 	}
