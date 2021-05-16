@@ -1,20 +1,41 @@
 let MC = {};
-MC.canvas = document.getElementById("myCanvas");
-MC.ctx    = MC.canvas.getContext("2d");
-MC.click1Sound = document.getElementById("click1Sound");
-MC.click2Sound = document.getElementById("click2Sound");
-MC.timerLabel = document.getElementById('timerLabel');
-
-MC.game   = CubeGame.GetInstance();
 
 init();
 updateFrame();
 
+
 function init() {
+	MC.canvas      = document.getElementById("myCanvas");
+	MC.ctx         = MC.canvas.getContext("2d");
+	MC.click1Sound = document.getElementById("click1Sound");
+	MC.click2Sound = document.getElementById("click2Sound");
+	MC.timerLabel  = document.getElementById('timerLabel');
+	MC.game        = CubeGame.GetInstance();
+
 	MC.game.setCubeSize(3);
 	MC.game.setCubeStage(4);
 	MC.game.shuffleCube();
 	MC.game.enableSound(true);
+}
+
+// Web Audio API で再生するための初期化.
+function initWebAudio() {
+	if (MC.audioContext) {
+		return;
+	}
+
+	// new AudioContext()はclickイベントで生成すること.
+	// The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
+
+	MC.audioContext = new AudioContext();
+
+	// ローカルファイルのアクセスでエラーになる。サーバー上で起動すること。
+	// MediaElementAudioSource outputs zeroes due to CORS access restrictions for file://../data/sound/click1.wav
+
+	MC.track1       = MC.audioContext.createMediaElementSource(MC.click1Sound);
+	MC.track1.connect(MC.audioContext.destination);
+	MC.track2       = MC.audioContext.createMediaElementSource(MC.click2Sound);
+	MC.track2.connect(MC.audioContext.destination);
 }
 
 // main loop
@@ -40,7 +61,7 @@ function updateFrame() {
 	if (state.redraw) {
 		MC.game.draw(MC.ctx, MC.canvas.width, MC.canvas.height);
 	}
-	if (state.sound == 0) {	
+	if (state.sound == 0) {
 		MC.click1Sound.pause();
 		MC.click1Sound.currentTime = 0;
 		MC.click1Sound.play();
@@ -97,6 +118,7 @@ function doMatch() {
 
 // click
 MC.canvas.addEventListener('mousedown', function(event) {
+	initWebAudio();
 	let rect = MC.canvas.getBoundingClientRect();
     let x = event.clientX - rect.left;
     let y = event.clientY - rect.top;
@@ -106,6 +128,7 @@ MC.canvas.addEventListener('mousedown', function(event) {
 
 // touch
 MC.canvas.addEventListener('touchstart', function(event) {
+	initWebAudio();
 	event.preventDefault();
 	if (event.touches.length == 0) {
 		return;
