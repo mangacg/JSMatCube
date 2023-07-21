@@ -3,7 +3,10 @@ let MC = {};
 init();
 updateFrame();
 
-
+/**
+ * 初期化.
+ *
+ */
 function init() {
 	MC.canvas      = document.getElementById("myCanvas");
 	MC.ctx         = MC.canvas.getContext("2d");
@@ -18,7 +21,11 @@ function init() {
 	MC.game.enableSound(true);
 }
 
-// Web Audio API で再生するための初期化.
+/**
+ *Web Audio API で再生するための初期化.
+ *
+ *
+ */
 function initWebAudio() {
 	return; // スマホで動かなくなったので無効にした.
 
@@ -40,7 +47,11 @@ function initWebAudio() {
 	MC.track2.connect(MC.audioContext.destination);
 }
 
-// main loop
+/**
+ * main loop
+ *
+ *
+ */
 function updateFrame() {
     requestAnimationFrame(updateFrame);
 
@@ -86,6 +97,11 @@ function updateFrame() {
 	updateTimeCount();
 }
 
+/**
+ * 経過時間を更新する.
+ *
+ *
+ */
 function updateTimeCount() {
 	if (!MC.startTime) {
 		return;
@@ -101,6 +117,11 @@ function updateTimeCount() {
     MC.timerLabel.innerText = " Time : " + m + ':' + s + ':' + ms;	
 }
 
+/**
+ * 経過時間を初期化する.
+ *
+ *
+ */
 function startTimeCount(bEnable) {
 	if (bEnable) {
 		MC.startTime = Date.now();
@@ -111,6 +132,10 @@ function startTimeCount(bEnable) {
 	}
 }
 
+/**
+ * キューブが揃った時の処理.
+ *
+ */
 function doMatch() {
 	let timestr = MC.timerLabel.innerText;
 	startTimeCount(false);
@@ -118,17 +143,23 @@ function doMatch() {
 	MC.timerLabel.innerText = timestr;
 }
 
-// click
+/**
+ * マウスクリックイベント.
+ *
+ */
 MC.canvas.addEventListener('mousedown', function(event) {
 	initWebAudio();
 	let rect = MC.canvas.getBoundingClientRect();
-    let x = event.clientX - rect.left;
-    let y = event.clientY - rect.top;
+    let x    = event.clientX - rect.left;
+    let y    = event.clientY - rect.top;
 	let isNotLeft = event.button != 0;
 	MC.game.click(x, y, isNotLeft);
 });
 
-// touch
+/**
+ * タッチイベント.
+ *
+ */
 MC.canvas.addEventListener('touchstart', function(event) {
 	initWebAudio();
 	event.preventDefault();

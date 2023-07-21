@@ -8,8 +8,16 @@ CubeGameDef = {
 //--------------------------------------------------------------
 // CubeGame
 //--------------------------------------------------------------
+/**
+ * @class CubeGame
+ *
+ */
 class CubeGame {
 
+	/**
+	 * Creates an instance of CubeGame.
+	 * @memberof CubeGame
+	 */
 	constructor() {
 		this.camMat = new Matrix44();
 		this.winMat = new Matrix44();
@@ -26,6 +34,13 @@ class CubeGame {
 
 	// instance
 	//static instance = new CubeGame();
+	/**
+	 *
+	 *
+	 * @static
+	 * @return {*} 
+	 * @memberof CubeGame
+	 */
 	static GetInstance() {
 		if (CubeGameDef.instance == null) {
 			CubeGameDef.instance = new CubeGame();
